@@ -4,17 +4,18 @@
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-  var cb = function(data) {
+  // callback that invokes the SwimTeam function with the returned string corresponding to a 
+  var cb = function(data) { 
     console.log('callback success: ' + data);
-    SwimTeam.move(data);
+    SwimTeam.move(data); // invokes the client's swim
   }
   
-  $('.btn-move').on('click', function(e) {
+  $('.btn-move').on('click', function(e) { // sends GET request to server on button click
     console.log('button click');
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      success: cb
+      success: cb // invokes callback function passing in data from server on success response
     });
   });
   

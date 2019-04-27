@@ -7,14 +7,15 @@ const multipart = require('./multipartUtils');
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 ////////////////////////////////////////////////////////
 
+var commands = ['up', 'down', 'left', 'right'];
+var randomNum = () => Math.floor(Math.random() * 3);
+
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   console.log('router called');
-  // if (req.type === 'GET') {
-  //   res.end('up');
-  // }
   res.writeHead(200, headers);
-  res.end('up');
+  res.write(commands[randomNum()]); // writes data onto req object that is returned
+  res.end();
 };
 
 /*
