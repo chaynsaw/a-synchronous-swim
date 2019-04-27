@@ -15,6 +15,10 @@ module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   console.log('router called');
   res.writeHead(200, headers);
+  if (req.method === 'POST') {
+    let file = req.file;
+    // save file
+  }
   if (req.method === 'GET') {
     res.write(messageQueue.dequeue()); // writes data onto req object that is returned
   }
@@ -25,4 +29,11 @@ module.exports.router = (req, res, next = ()=>{}) => {
 /*
 return an object of string that the client can use to make a swim command
 goes into res.end('here')
+*/
+
+/*
+distinguishing between different kinds of get requests
+updating background image
+.done() after returning get request and not running failure/ error callback
+
 */
