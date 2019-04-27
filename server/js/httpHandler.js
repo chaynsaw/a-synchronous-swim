@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const headers = require('./cors');
 const multipart = require('./multipartUtils');
+const messageQueue = require('./messageQueue.js');
 
 // Path for the background image ///////////////////////
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
@@ -14,7 +15,10 @@ module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   console.log('router called');
   res.writeHead(200, headers);
-  res.write(commands[randomNum()]); // writes data onto req object that is returned
+  if (req.method === 'GET') {
+    res.write(messageQueue.dequeue()); // writes data onto req object that is returned
+  }
+
   res.end();
 };
 

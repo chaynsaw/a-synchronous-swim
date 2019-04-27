@@ -6,8 +6,12 @@
 
   // callback that invokes the SwimTeam function with the returned string corresponding to a 
   var cb = function(data) { 
-    console.log('callback success: ' + data);
-    SwimTeam.move(data); // invokes the client's swim
+    if (data === 'failed') {
+      console.log(data)
+    } else {
+      console.log('callback success: ' + data);
+      SwimTeam.move(data); // invokes the client's swim
+    }
   }
   
   $('.btn-move').on('click', function(e) { // sends GET request to server on button click
@@ -15,7 +19,8 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      success: cb // invokes callback function passing in data from server on success response
+      success: cb, // invokes callback function passing in data from server on success response
+      // error: console.log('Failed AJAX request')
     });
   });
   
