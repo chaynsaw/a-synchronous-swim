@@ -1,6 +1,23 @@
+// import { createBrotliCompress } from "zlib";
+
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
+
+  var cb = function(data) {
+    console.log('callback success: ' + data);
+    SwimTeam.move(data);
+  }
+  
+  $('.btn-move').on('click', function(e) {
+    console.log('button click');
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: cb
+    });
+  });
+  
 
   //
   // TODO: build the swim command fetcher here
